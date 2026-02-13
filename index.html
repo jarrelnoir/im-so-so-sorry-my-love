@@ -12,45 +12,72 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  background: linear-gradient(135deg, #0f0f1a, #1e1e2f);
+  background: radial-gradient(circle at top, #1b1b2f, #0f0f1a 70%);
   font-family: Georgia, serif;
   color:white;
-  text-align:center;
   overflow:hidden;
+  text-align:center;
+}
+
+/* Animated stars */
+body::before {
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  animation: moveStars 60s linear infinite;
+  opacity:0.25;
+}
+
+@keyframes moveStars {
+  from { transform: translate(0,0); }
+  to { transform: translate(-500px,-500px); }
 }
 
 #intro {
-  font-size:24px;
+  font-size:26px;
   opacity:0;
   animation: fadeIn 3s forwards;
+  text-shadow:0 0 15px rgba(255,255,255,0.4);
 }
 
 #countdown {
-  font-size:70px;
+  font-size:80px;
   margin-top:20px;
+  text-shadow:0 0 20px rgba(255,255,255,0.6);
 }
 
 .container {
-  max-width:600px;
+  max-width:750px;
   width:90%;
   opacity:0;
-  transition: opacity 3s ease;
+  transform: translateY(20px);
+  transition: opacity 3s ease, transform 3s ease;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.05);
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 0 40px rgba(255,255,255,0.05);
 }
 
 h1 {
   font-weight:normal;
   margin-bottom:25px;
+  text-shadow:0 0 10px rgba(255,255,255,0.3);
 }
 
 p {
   line-height:1.8;
   margin-bottom:18px;
   font-size:17px;
+  text-align:justify;
 }
 
 .signature {
   margin-top:30px;
   font-style:italic;
+  text-align:right;
 }
 
 @keyframes fadeIn {
@@ -71,25 +98,32 @@ p {
   <h1>I'm Truly Sorry 🤍</h1>
 
   <p>
-    I know I hurt you. Leaving you on read during a moment
-    that was meant to be intimate and meaningful was wrong.
+    Haelvin, the loml. I want to sincerely apologize for hurting you and making you upset. 
+    I know I was wrong, especially for leaving you on read during a moment that was meant 
+    to feel intimate and meaningful between us.
   </p>
 
   <p>
-    There is no excuse for my actions.
-    You deserve attention, respect, and emotional presence.
-    I regret disappointing you, and I take full responsibility.
+    There is no excuse for what I did. I understand that my actions may have made you feel 
+    unimportant or ignored, and that truly breaks my heart. You deserve my attention, 
+    respect, and emotional presence.
   </p>
 
   <p>
-    I care about you deeply, Haelvin.
-    I never want to be the reason you feel unimportant.
-    I am willing to grow and do better for us.
+    I regret disappointing you, not just this time but whenever I failed to be the partner 
+    you need. I take full responsibility for my mistakes, and I genuinely want to make 
+    things right.
+  </p>
+
+  <p>
+    I care about you deeply, Haelvin. I never want to be the reason you feel hurt. 
+    I am truly sorry, and I hope you can give me the chance to prove through my actions 
+    that you matter so much to me.
   </p>
 
   <div class="signature">
     With all my sincerity,<br>
-    Yours 🤍
+    Yours — Jarrel 🤍
   </div>
 </div>
 
@@ -115,6 +149,7 @@ let interval = setInterval(() => {
     setTimeout(() => {
       introEl.style.display = "none";
       messageEl.style.opacity = "1";
+      messageEl.style.transform = "translateY(0)";
       music.play().catch(() => {});
     }, 1500);
   }
